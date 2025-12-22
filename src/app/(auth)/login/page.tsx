@@ -1,4 +1,4 @@
-'use client'; // 👈 สำคัญมาก! หน้า Login ต้องมีการโต้ตอบ (Input, Button) จึงต้องเป็น Client Component
+'use client';
 
 import React, { useState } from 'react';
 import {
@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import { signIn } from 'next-auth/react';
 
-// 1. Arrow Function Component (รูปแบบที่แนะนำ)
+
 export default function LoginPage() {
     const theme = useTheme();
 
@@ -37,10 +37,10 @@ export default function LoginPage() {
     };
 
     return (
-        // 2. Container: ใช้จำกัดความกว้างสูงสุดของเนื้อหา
+        // Container: ใช้จำกัดความกว้างสูงสุดของเนื้อหา
         <Container
             component="main"
-            maxWidth="xs" // 👈 สำคัญ! จำกัดความกว้างสูงสุดแค่จอขนาดเล็ก (xs) เพื่อให้หน้า Login ดูดีบน Desktop ด้วย
+            maxWidth="xs" // จำกัดความกว้างสูงสุดแค่จอขนาดเล็ก (xs) เพื่อให้หน้า Login ดูดีบน Desktop ด้วย
             sx={{
                 // 3. Mobile-First Padding: ให้มี Padding บน-ล่าง บนทุกจอ
                 pt: 8,
@@ -67,49 +67,20 @@ export default function LoginPage() {
                 <Typography
                     component="h1"
                     variant="h5"
+                    color='black'
                     textAlign="center"
                     gutterBottom // เพิ่มระยะห่างด้านล่าง
                 >
                     เข้าสู่ระบบ Chat App
                 </Typography>
 
-                {/* 6. Form/Stack: สำหรับจัดเรียง Input และ Button */}
+                {/* Form/Stack: สำหรับจัดเรียง Input และ Button */}
                 <Box component="form" onSubmit={handleLogin} sx={{ mt: 2 }}>
                     <Stack spacing={2}>
-                        <TextField
-                            required
-                            fullWidth
-                            id="email"
-                            label="อีเมล"
-                            name="email"
-                            autoComplete="email"
-                            autoFocus
-                            variant="outlined"
-                        />
-                        <TextField
-                            required
-                            fullWidth
-                            name="password"
-                            label="รหัสผ่าน"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                            variant="outlined"
-                        />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            size="large"
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Log in
-                        </Button>
-
                         <Button
                             type="button"
                             fullWidth
-                            variant="outlined"
+                            variant="contained"
                             size="large"
                             sx={{ mt: 3, mb: 2 }}
                             onClick={loginWithGoogle}
