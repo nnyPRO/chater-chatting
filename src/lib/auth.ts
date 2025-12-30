@@ -76,7 +76,7 @@ export const authOptions: NextAuthOptions = {
     // This function is executed when the client (React) side calls useSession() 
     // or the server side calls getServerSession().
     async session({ session, token }) {
-      if (token && session.user && session.user.id) {
+      if (token) {
         session.user.id = token.id
         session.user.name = token.name
         session.user.email = token.email

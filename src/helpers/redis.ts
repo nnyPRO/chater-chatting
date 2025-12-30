@@ -7,8 +7,13 @@ export async function fetchRedis(
     command: Command,
     ...args: (string | number)[]
 ) {
+    if (!upstashRedisRestUrl || !authToken) {
+        throw new Error('Missing Upstash Redis environment variables')
+    }
     const commandUrl = `${upstashRedisRestUrl}/${command}/${args.join('/')}`
-
+    console.log('--- DEBUG REDIS ---')
+    console.log('URL:', commandUrl)
+    console.log('-------------------')
     const response = await fetch(commandUrl, {
         headers: {
             Authorization: `Bearer ${authToken}`,
@@ -17,7 +22,8 @@ export async function fetchRedis(
     })
 
     if (!response.ok) {
-        throw new Error(`Error executing Redis command: ${response.statusText}`)
+        const errorText = await response.text()
+        throw new Error(`Error executing Redis command: ${errorText}`)
     }
 
     const data = await response.json()
