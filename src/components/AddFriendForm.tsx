@@ -1,7 +1,7 @@
 'use client'
 
 import { Box, TextField, Button, Alert } from "@mui/material";
-import * as React from 'react';
+import { useState } from 'react';
 import axios, { AxiosError } from 'axios';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
@@ -12,7 +12,7 @@ import { addFriendValidator } from "@/lib/validations/add-friend";
 type FormData = z.infer<typeof addFriendValidator>;
 
 export default function AddFriendForm() {
-    const [showSuccessState, setShowSuccessState] = React.useState<boolean>(false);
+    const [showSuccessState, setShowSuccessState] = useState<boolean>(false);
 
     // 2. Setup useForm
     const {

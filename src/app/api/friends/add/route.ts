@@ -76,7 +76,6 @@ export async function POST(req: Request) {
 
         return new Response('OK')
     } catch (error) {
-        console.error("ADD_FRIEND_ERROR:", error) // เพิ่มบรรทัดนี้เพื่อดู Log ใน VS Code Terminal
         // Validation error (The data is incorrect.)
         if (error instanceof z.ZodError) {
             return new Response('Invalid request payload', { status: 422 })

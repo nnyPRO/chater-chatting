@@ -1,18 +1,17 @@
-// src/app/page.tsx
 import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth' // ต้อง import authOptions ของคุณมา
+import { authOptions } from '@/lib/auth'
 import { redirect } from 'next/navigation'
 
 export default async function Home() {
   const session = await getServerSession(authOptions)
 
-  // 1. ถ้ามี session แล้ว (Login แล้ว) ให้ไปหน้า Dashboard เลย
+  // 1. If you already have a session (are logged in), go directly to the Dashboard.
   if (session) {
     redirect('/dashboard')
   }
 
-  // 2. ถ้ายังไม่ Login ให้ดีดไปหน้า Login
+  // 2. If you are not logged in, please be redirected to the login page.
   redirect('/login')
 
-  // ไม่ต้อง return JSX อะไร เพราะมัน redirect ไปก่อนแล้ว
+  // There's no need to return JSX because it's already redirected.
 }
