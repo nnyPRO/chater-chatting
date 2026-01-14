@@ -10,13 +10,25 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import ChatIcon from '@mui/icons-material/Chat';
 import GroupIcon from '@mui/icons-material/Group';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Badge } from '@mui/material';
 
-export function BottomNav() {
+
+interface BottomNavProps {
+  requestCount: number
+}
+
+export function BottomNav({ requestCount }: BottomNavProps) {
   const pathname = usePathname();
 
   const navItems = [
     { label: 'Chat', icon: <ChatIcon />, href: '/dashboard/chat' },
-    { label: 'Friends', icon: <GroupIcon />, href: '/dashboard/friends' },
+    {
+      label: 'Friends', icon: (
+        <Badge badgeContent={requestCount} color='primary' invisible={requestCount === 0}>
+          <GroupIcon />
+        </Badge>
+      ), href: '/dashboard/friends'
+    },
     { label: 'Profile', icon: <AccountCircleIcon />, href: '/dashboard/profile' },
   ];
 
@@ -39,6 +51,7 @@ export function BottomNav() {
             component={Link}  // modify this button to Link
             href={item.href}
           />
+
         ))}
       </BottomNavigation>
     </Box>

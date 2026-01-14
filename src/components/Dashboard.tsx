@@ -21,7 +21,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
     }),
 }));
 
-export default function Dashboard({ children }: { children: React.ReactNode }) {
+export default function Dashboard({ children, requestCount }: { children: React.ReactNode; requestCount: number; }) {
     const [open, setOpen] = React.useState(true);
 
     const toggleDrawer = () => {
@@ -34,7 +34,7 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
 
             <Box sx={{ display: 'flex', minHeight: '100vh', overflow: 'hidden' }}>
                 {/* Desktop */}
-                <Sidebar open={open} toggleDrawer={toggleDrawer} />
+                <Sidebar requestCount={requestCount} open={open} toggleDrawer={toggleDrawer} />
 
                 {/* Main recognizes the open state and moves accordingly */}
                 <Main open={open}>
@@ -43,7 +43,7 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
                 </Main>
 
                 {/* Mobile */}
-                <BottomNav />
+                <BottomNav requestCount={requestCount} />
             </Box>
         </SessionProvider>
     );

@@ -21,6 +21,7 @@ import GroupIcon from '@mui/icons-material/Group';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { Badge } from '@mui/material';
 
 
 
@@ -113,14 +114,19 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 interface SidebarProps {
     open: boolean;
     toggleDrawer: () => void;
+    requestCount: number
 }
 
-export function Sidebar({ open, toggleDrawer }: SidebarProps) {
+export function Sidebar({ open, toggleDrawer, requestCount }: SidebarProps) {
     const theme = useTheme();
 
     const navItems = [
         { text: 'Chat', icon: <ChatIcon />, href: '/dashboard/chat' },
-        { text: 'Friends', icon: <GroupIcon />, href: '/dashboard/friends' },
+        {
+            text: 'Friends', icon: <Badge badgeContent={requestCount} color='primary' invisible={open || requestCount === 0}>
+                <GroupIcon />
+            </Badge>, href: '/dashboard/friends'
+        },
         { text: 'Profile', icon: <AccountCircleIcon />, href: '/dashboard/profile' },
     ];
     const pathname = usePathname();
@@ -177,6 +183,7 @@ export function Sidebar({ open, toggleDrawer }: SidebarProps) {
                                         },
                                 ]}
                             >
+                                {/* <Badge badgeContent={requestCount} color='primary' invisible={index !== 1 || requestCount === 0}> */}
                                 <ListItemIcon
                                     sx={[
                                         {
@@ -206,6 +213,8 @@ export function Sidebar({ open, toggleDrawer }: SidebarProps) {
                                             },
                                     ]}
                                 />
+                                <Badge badgeContent={requestCount} color='primary' invisible={!open || index !== 1 || requestCount === 0} />
+                                {/* </Badge> */}
                             </ListItemButton>
                         </ListItem>
                     ))}
