@@ -3,6 +3,7 @@ import { NextAuthOptions } from 'next-auth'
 import { UpstashRedisAdapter } from '@next-auth/upstash-redis-adapter'
 import { db } from './db'
 import GoogleProvider from 'next-auth/providers/google'
+import { fetchRedis } from '@/helpers/redis'
 // import { fetchRedis } from '@/helpers/redis'
 
 function getGoogleCredentials() {
@@ -41,12 +42,12 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-      // const dbUserResult = (await fetchRedis('get', `user:${token.id}`)) as
-      //   | string
-      //   | null
+      const dbUserResult = (await fetchRedis('get', `user:${token.id}`)) as
+        | string
+        | null
 
       // find user in Redis
-      const dbUser = (await db.get(`user:${token.id}`)) as User | null
+      // const dbUser = (await db.get(`user:${token.id}`)) as User | null
 
       // if (!dbUserResult) {
 
@@ -54,14 +55,14 @@ export const authOptions: NextAuthOptions = {
       // If it can't be found in the DB (for example, if you just logged in for the first time,
       // the Adapter might not have finished writing data, or it might be the first time you've created a token), 
       // it will use the user information provided by Google Provider to insert the token.id and return the token.
-      if (!dbUser) {
+      if (!dbUserResult) {
         if (user) {
           token.id = user!.id
         }
         return token
       }
 
-      // const dbUser = JSON.parse(dbUserResult) as User
+      const dbUser = JSON.parse(dbUserResult) as User
 
       // Old user
       // If it finds user data in the DB, it will overwrite the latest data from the DB (id, name, email, picture)
