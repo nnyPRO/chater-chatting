@@ -14,3 +14,8 @@ UI & Communication: Modern interface built with MUI, using Axios for robust API 
 
 
 Deployment: Automated CI/CD and hosting via Vercel.
+
+#Roadmap#
+✅ Friend Management (Search, Request, Accept) 
+
+⏳ Real-time Messaging (Upcoming)
