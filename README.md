@@ -1,5 +1,16 @@
-Currently developing a full-stack chat platform using Next.js and TypeScript, focused on delivering a seamless user experience.
-Built a comprehensive friend management system that allows users to search, send, and manage friend requests.
-Integrated Redis for efficient, in-memory data handling of user relationships and application states.
-Implemented a modern UI with MUI (Material UI) and managed data fetching via Axios.
-Managed seamless application deployment and hosting using Vercel.
+chater-chatting A full-stack chat application focused on seamless user experience and real-time relationship management. 
+
+
+Frontend & Backend: Full-stack development with Next.js and TypeScript. 
+
+
+Friend System: Comprehensive management system for searching, sending, and accepting friend requests. 
+
+
+Data Strategy: Utilizes Redis for efficient, in-memory handling of user states and relationships. 
+
+
+UI & Communication: Modern interface built with MUI, using Axios for robust API interaction. 
+
+
+Deployment: Automated CI/CD and hosting via Vercel.
