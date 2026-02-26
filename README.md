@@ -1,4 +1,4 @@
-chater-chatting A full-stack chat application focused on seamless user experience and real-time relationship management. 
+#chater-chatting A full-stack chat application focused on seamless user experience and real-time relationship management. 
 
 
 Frontend & Backend: Full-stack development with Next.js and TypeScript. 
@@ -15,7 +15,7 @@ UI & Communication: Modern interface built with MUI, using Axios for robust API 
 
 Deployment: Automated CI/CD and hosting via Vercel.
 
-#Roadmap#
+#Roadmap
 ✅ Friend Management (Search, Request, Accept) 
 
 ⏳ Real-time Messaging (Upcoming)
