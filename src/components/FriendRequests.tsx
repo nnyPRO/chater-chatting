@@ -3,6 +3,9 @@
 import { Avatar, IconButton, List, ListItem, ListItemAvatar, ListItemText, Stack, Typography } from "@mui/material"
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 
 interface FriendRequestsProps {
@@ -12,10 +15,29 @@ interface FriendRequestsProps {
 
 // TODO: ทำตรงนี้ต่อ
 export function FriendRequests({ allFriendRequests, sessionId }: FriendRequestsProps) {
-    // const acceptFriend = (request) => {
+    const router = useRouter()
 
+    const [friendRequests, setFriendRequests] = useState<IncomingFriendRequest[]>(allFriendRequests)
 
-    // }
+    const acceptFriend = async (senderId: string) => {
+        await axios.post('/api/friends/accept', { id: senderId })
+
+        setFriendRequests((prev) =>
+            prev.filter((request) => request.senderId !== senderId)
+        )
+
+        router.refresh()
+    }
+
+    const denyFriend = async (senderId: string) => {
+        await axios.post('/api/friends/deny', { id: senderId })
+
+        setFriendRequests((prev) =>
+            prev.filter((request) => request.senderId !== senderId)
+        )
+
+        router.refresh()
+    }
 
 
     return (
@@ -30,7 +52,7 @@ export function FriendRequests({ allFriendRequests, sessionId }: FriendRequestsP
                         <IconButton
                             edge="end"
                             aria-label="accept"
-                            // onClick={() => acceptFriend(request.senderId)}
+                            onClick={() => acceptFriend(request.senderId)}
                             sx={{ color: 'success.main' }}
                         >
                             <CheckCircleIcon fontSize="large" />
@@ -39,7 +61,7 @@ export function FriendRequests({ allFriendRequests, sessionId }: FriendRequestsP
                         <IconButton
                             edge="end"
                             aria-label="decline"
-                            // onClick={() => denyFriend(request.senderId)}
+                            onClick={() => denyFriend(request.senderId)}
                             sx={{ color: 'error.main' }}
                         >
                             <CancelIcon fontSize="large" />
